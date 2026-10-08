@@ -2,39 +2,40 @@
 
 ## Dataset yang Dipilih
 
-Isi informasi berikut sebelum Milestone 1.
-
 | Item | Isi |
 |---|---|
-| Nama dataset | `[isi nama dataset]` |
-| Sumber | `[URL BPS / Satu Data Indonesia / BMKG / HuggingFace / Kaggle]` |
-| Lisensi/ketentuan pakai | `[isi]` |
-| Ukuran | `[>= 500 MB atau > 1.000.000 baris]` |
-| Periode data | `[isi]` |
-| Unit analisis | `[isi]` |
+| Nama dataset | APBD Pemda Indonesia (`apbd-pemda-indonesia`) |
+| Sumber | Hugging Face Datasets (`https://huggingface.co/datasets/pohonmaple/apbd-pemda-indonesia`) |
+| Format lokal | CSV |
+| Ukuran lokal | ±123 MB |
+| Jumlah baris | 1.155.181 |
+| Periode data | 2011–2025 |
+| Unit analisis | Data rincian akun APBD per Pemerintah Daerah (Provinsi/Kabupaten/Kota) berdasarkan tahun dan bulan |
 
-## Tempat Mencari Dataset
+Dataset memenuhi persyaratan dataset skala besar pada Milestone 1
+karena memiliki lebih dari 1 juta baris.
 
-Pilih dataset Indonesia yang legal digunakan, dapat didokumentasikan sumbernya, dan memenuhi batas ukuran tugas.
+## Sumber Dataset
 
-| Situs | Kegunaan |
-|---|---|
-| [Satu Data Indonesia](https://data.go.id/) | Portal data terbuka lintas instansi pemerintah Indonesia. |
-| [Badan Pusat Statistik](https://www.bps.go.id/) | Statistik sosial, ekonomi, kependudukan, dan data wilayah. |
-| [BMKG Data Online](https://dataonline.bmkg.go.id/) | Data cuaca, iklim, gempa bumi, dan observasi meteorologi. |
-| [Hugging Face Datasets](https://huggingface.co/datasets) | Dataset publik yang dapat dicari berdasarkan topik, bahasa, atau ukuran. |
-| [Kaggle Datasets](https://www.kaggle.com/datasets) | Katalog dataset publik; periksa lisensi dan dokumentasi pembuatnya. |
-| [Google Dataset Search](https://datasetsearch.research.google.com/) | Mesin pencari untuk menemukan dataset dari berbagai portal. |
+Dataset diperoleh melalui Hugging Face Datasets:
+
+https://huggingface.co/datasets/pohonmaple/apbd-pemda-indonesia
+
+Dataset memiliki 1.155.181 baris dan memuat informasi antara lain tahun,
+bulan, provinsi, pemerintah daerah, akun APBD, anggaran, realisasi,
+dan persentase.
 
 ## Cara Memperoleh Data
 
-1. Buka URL sumber di atas.
-2. Unduh file ke folder `data/raw/` tanpa mengubah data mentah.
-3. Catat nama file dan checksum bila tersedia.
-4. Ubah variabel `DATA_PATH` pada `notebooks/01_data_profiling.ipynb` agar menunjuk ke file tersebut.
+Dataset dapat diperoleh menggunakan library `datasets` dari Hugging Face
+atau melalui halaman dataset pada sumber resmi.
 
-## Aturan Penyimpanan
+Contoh menggunakan Python:
 
-- Jangan commit dataset mentah atau hasil olahan berukuran besar ke Git.
-- File pada `data/raw/` adalah data asli dan tidak boleh diubah.
-- Simpan hasil transformasi yang dapat direproduksi pada `data/processed/`.
+```python
+from datasets import load_dataset
+
+dataset = load_dataset(
+    "pohonmaple/apbd-pemda-indonesia",
+    split="train"
+)
